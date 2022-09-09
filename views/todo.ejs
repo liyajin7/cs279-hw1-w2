@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<!-- link our CSS stylesheet, nice-looking fonts for UI -->
+<head>
+    <title>Todo App</title>
+    <link rel="stylesheet" href="/static/stylesheets/style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- div containing all to-do entry / editing / listing / removal functionality -->
+    <div class="todo-container">
+        <h2>Liya's Lovely To-Do's 🕊</h2>
+
+        <!-- main todo functionality, styled with CSS class "todo" -->
+        <div class="todo">
+
+            <!-- form for user input & button, send POST request when user inputs new to-do (form-data sent
+                to current directory)-->
+            <form action="/" method="POST" class="todo-header">
+                <input type="text" name="content">
+                <button type="submit"><span class="fas fa-plus"></span></button>
+            </form>
+            
+            <!-- ul used to hold list of li elements--to-do tasks -->
+            <ul class="todo-list">
+                <!-- applies formatting to all instances of to-do's -->
+                <% todoTasks.forEach(details => { %>
+                <li class="todo-list-item">
+                    
+                    <!-- formats existing to-do tasks GETted (gotten) from DB with edit & delete icons as
+                        formatted by edit & remove classes in style.css -->
+                    <div class="todo-list-item-name"><%= details.content %></div>
+                    <a href="/edit/<%= details._id %>" class="edit">
+                        <span class="fas fa-edit"></span>
+                    </a>
+                    <a href="/remove/<%= details._id %>" class="remove">
+                        <span class="fas fa-times"></span>
+                    </a>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</body>
